@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".RegActivity">
 
     <TextView
@@ -13,58 +12,131 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
         android:text="FInd Doctor">
 
     </TextView>
 
     <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/name_editText"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:hint="User Name"
-        android:layout_marginTop="10dp"
-        android:layout_margin="20dp"
-        android:id="@+id/userName_ID">
+        android:layout_marginTop="60dp"
+        android:hint="Name">
 
     </EditText>
 
     <EditText
+        android:id="@+id/ageEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Gmail..."
-        android:layout_marginTop="10dp"
-        android:layout_margin="20dp"
-        android:id="@+id/user_gmail_ID">
+        android:layout_marginTop="60dp"
+        android:layout_toRightOf="@+id/name_editText"
+        android:hint="Age">
 
     </EditText>
+
     <EditText
+        android:id="@+id/genderEditText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name_editText"
+        android:layout_marginTop="10dp"
+        android:hint="Gender">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/phoneEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ageEditText"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/genderEditText"
+        android:hint="Phone">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/addressEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/genderEditText"
+        android:hint="Address">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/informationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addressEditText"
+        android:layout_marginTop="10dp"
+        android:hint="Write your information...">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/userName_ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/informationEditText"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:hint="User Name">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/user_gmail_ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userName_ID"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:hint="Enter Gmail...">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/user_password_ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_gmail_ID"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:hint="Password..."
-        android:layout_marginTop="10dp"
-        android:inputType="textPassword"
-        android:layout_margin="20dp"
-        android:id="@+id/user_password_ID">
+        android:inputType="textPassword">
 
     </EditText>
 
     <Button
+        android:id="@+id/regSubBtn_ID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="submit"
+        android:layout_below="@+id/user_password_ID"
         android:layout_marginTop="10dp"
-        android:id="@+id/regSubBtn_ID">
+        android:text="submit">
 
     </Button>
 
-
-
-
     <ProgressBar
+        android:id="@+id/progressBar_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar_ID"
-        android:visibility="gone"
-        android:layout_marginTop="10dp">
+        android:layout_below="@+id/regSubBtn_ID"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="176dp"
+        android:layout_marginBottom="91dp"
+        android:visibility="visible">
 
     </ProgressBar>
-</LinearLayout>
+
+
+</RelativeLayout>

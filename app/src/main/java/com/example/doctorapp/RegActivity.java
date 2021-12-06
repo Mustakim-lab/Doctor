@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 public class RegActivity extends AppCompatActivity {
 
-    private EditText usernameText,gmailText,passwordText;
+    private EditText usernameText,gmailText,passwordText,nameText,ageText,genderText,phoneText,addressText,infoText;
     private Button subBtn;
     private ProgressBar progressBar;
 
@@ -37,6 +37,13 @@ public class RegActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
 
+        nameText=findViewById(R.id.name_editText);
+        ageText=findViewById(R.id.ageEditText);
+        genderText=findViewById(R.id.genderEditText);
+        phoneText=findViewById(R.id.phoneEditText);
+        addressText=findViewById(R.id.addressEditText);
+        infoText=findViewById(R.id.informationEditText);
+
         usernameText=findViewById(R.id.userName_ID);
         gmailText=findViewById(R.id.user_gmail_ID);
         passwordText=findViewById(R.id.user_password_ID);
@@ -48,11 +55,36 @@ public class RegActivity extends AppCompatActivity {
         subBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name=nameText.getText().toString().trim();
+                String age=ageText.getText().toString().trim();
+                String gender=genderText.getText().toString();
+                String phone=phoneText.getText().toString().trim();
+                String address=addressText.getText().toString();
+                String info=infoText.getText().toString().trim();
+
                 String username=usernameText.getText().toString().trim();
                 String gmail=gmailText.getText().toString().trim();
                 String password=passwordText.getText().toString().trim();
 
-                if (username.isEmpty()){
+                if (name.isEmpty()){
+                    nameText.setError("Enter name!!");
+                    nameText.requestFocus();
+                }else if (age.isEmpty()){
+                    ageText.setError("Enter age!!");
+                    ageText.requestFocus();
+                }else if (gender.isEmpty()){
+                    genderText.setError("Enter gender!!");
+                    genderText.requestFocus();
+                }else if (phone.isEmpty()) {
+                    phoneText.setError("Enter phone!!");
+                    phoneText.requestFocus();
+                }else if (address.isEmpty()) {
+                    addressText.setError("Enter address!!");
+                    addressText.requestFocus();
+                }else if (info.isEmpty()) {
+                    infoText.setError("Enter information!!");
+                    infoText.requestFocus();
+                }else if (username.isEmpty()){
                     usernameText.setError("Enter User Name!!");
                     usernameText.requestFocus();
                 }else if (gmail.isEmpty()){
@@ -69,13 +101,13 @@ public class RegActivity extends AppCompatActivity {
                     passwordText.requestFocus();
                 }else {
                     progressBar.setVisibility(View.VISIBLE);
-                    registerUser(username,gmail,password);
+                    registerUser(name,age,gender,phone,address,info,username,gmail,password);
                 }
             }
         });
     }
 
-    private void registerUser(String username, String gmail, String password) {
+    private void registerUser(String name, String age, String gender, String phone, String address, String info, String username, String gmail, String password) {
         firebaseAuth.createUserWithEmailAndPassword(gmail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -84,6 +116,12 @@ public class RegActivity extends AppCompatActivity {
                     String userID=firebaseUser.getUid();
                     reference= FirebaseDatabase.getInstance().getReference("Doctor List").child(userID);
                     HashMap<String,Object> hashMap=new HashMap<>();
+                    hashMap.put("name",name);
+                    hashMap.put("age",age);
+                    hashMap.put("gender",gender);
+                    hashMap.put("phone",phone);
+                    hashMap.put("address",address);
+                    hashMap.put("information",info);
                     hashMap.put("id",userID);
                     hashMap.put("username",username);
                     hashMap.put("gmail",gmail);
