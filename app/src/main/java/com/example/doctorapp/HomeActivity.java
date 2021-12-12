@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.doctorapp.Fragment.ChatFragment;
+import com.example.doctorapp.Fragment.PrescriptionReFragment;
 import com.example.doctorapp.Fragment.UserFragment;
 import com.example.doctorapp.Model.Users;
 import com.google.android.material.tabs.TabLayout;
@@ -65,6 +66,7 @@ public class HomeActivity extends AppCompatActivity {
         FragmentPager fragmentPager=new FragmentPager(getSupportFragmentManager());
         fragmentPager.addFragment(new ChatFragment(),"Chat");
         fragmentPager.addFragment(new UserFragment(),"User");
+        fragmentPager.addFragment(new PrescriptionReFragment(),"Prescription");
         viewPager.setAdapter(fragmentPager);
         tabLayout.setupWithViewPager(viewPager);
 

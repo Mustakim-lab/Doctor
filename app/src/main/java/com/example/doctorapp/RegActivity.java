@@ -17,8 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -101,13 +104,14 @@ public class RegActivity extends AppCompatActivity {
                     passwordText.requestFocus();
                 }else {
                     progressBar.setVisibility(View.VISIBLE);
-                    registerUser(name,age,gender,phone,address,info,username,gmail,password);
+                    registerUser(age,gender,phone,address,username,gmail,password);
+                    sendinformation(name,info);
                 }
             }
         });
     }
 
-    private void registerUser(String name, String age, String gender, String phone, String address, String info, String username, String gmail, String password) {
+    private void registerUser(String age, String gender, String phone, String address, String username, String gmail, String password) {
         firebaseAuth.createUserWithEmailAndPassword(gmail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -116,12 +120,10 @@ public class RegActivity extends AppCompatActivity {
                     String userID=firebaseUser.getUid();
                     reference= FirebaseDatabase.getInstance().getReference("Doctor List").child(userID);
                     HashMap<String,Object> hashMap=new HashMap<>();
-                    hashMap.put("name",name);
                     hashMap.put("age",age);
                     hashMap.put("gender",gender);
                     hashMap.put("phone",phone);
                     hashMap.put("address",address);
-                    hashMap.put("information",info);
                     hashMap.put("id",userID);
                     hashMap.put("username",username);
                     hashMap.put("gmail",gmail);
@@ -138,5 +140,15 @@ public class RegActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void sendinformation(String name, String info) {
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference();
+       HashMap<String,Object> hashMap=new HashMap<>();
+       hashMap.put("name",name);
+       hashMap.put("information",info);
+
+       reference.child("Information").push().setValue(hashMap);
     }
 }

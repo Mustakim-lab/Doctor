@@ -21,6 +21,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewAdapter> {
     Context context;
     List<Users> usersList;
     String userID;
+
     public UserAdapter(Context context, List<Users> usersList) {
         this.context = context;
         this.usersList = usersList;
@@ -52,7 +53,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewAdapter> {
         private TextView textView;
         public ViewAdapter(@NonNull View itemView) {
             super(itemView);
-
             textView=itemView.findViewById(R.id.userName_ID);
             itemView.setOnClickListener(this);
         }
